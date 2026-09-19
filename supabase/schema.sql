@@ -1,3 +1,8 @@
+insert into storage.buckets (id, name, public) values ('article-images', 'article-images', true) on conflict (id) do nothing;
+
+create policy "Authenticated users upload article images" on storage.objects for insert to authenticated with check (bucket_id = 'article-images');
+create policy "Public can read article images" on storage.objects for select to public using (bucket_id = 'article-images');
+
 create table if not exists public.articles (
   id uuid primary key default gen_random_uuid(),
   author_id uuid not null references auth.users(id) on delete cascade,
