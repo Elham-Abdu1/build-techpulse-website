@@ -7,7 +7,7 @@ create table if not exists public.articles (
   content text not null,
   category text not null,
   cover_image_url text,
-  status text not null default 'draft' check (status in ('draft', 'pending', 'published', 'rejected')),
+  status text not null default 'published' check (status in ('draft', 'pending', 'published', 'rejected')),
   rejection_reason text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
